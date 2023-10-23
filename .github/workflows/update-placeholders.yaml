@@ -1,0 +1,12 @@
+name: Update Placeholders
+on:
+  push:
+    tags:        
+      - setup-complete
+jobs:
+  search-and-replace:
+    uses: akuity-adv-gitops-workshop/automated-repo-setup/.github/workflows/update-placeholders.yaml@main
+    with:
+      username: ${{ github.actor }}
+    secrets:
+      DEPLOY_PAT: ${{ secrets.DEPLOY_PAT }}
