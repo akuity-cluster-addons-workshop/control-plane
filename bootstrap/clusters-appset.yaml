@@ -16,7 +16,7 @@ spec:
       source:
         repoURL: https://github.com/akuity-cluster-addons-workshop/control-plane-template
         targetRevision: HEAD
-        path: 'clusters/{{name}}'
+        path: 'clusters/{{name}}/apps'
         directory:
           recurse: true
       destination:
