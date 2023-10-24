@@ -42,7 +42,7 @@ spec:
           valueFiles:
           - '../../../clusters/{{.name}}/{{.path.basename}}.yaml'
         repoURL: 'https://github.com/akuity-cluster-addons-workshop/control-plane-template'
-        path: {{.path.path}}
+        path: '{{.path.path}}'
         targetRevision: HEAD
       destination:
         namespace: '{{.path.basename}}'
