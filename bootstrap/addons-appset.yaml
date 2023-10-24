@@ -26,21 +26,21 @@ spec:
                   values: ['true']
   template:
     metadata:
-      name: 'addon-{{name}}-{{addonChart}}'
+      name: 'addon-{{.name}}-{{.addonChart}}'
     spec:
       project: default
       source:
         helm:
-          releaseName: '{{addonChart}}'
+          releaseName: '{{.addonChart}}'
           ignoreMissingValueFiles: true
           valueFiles:
-          - '../../../clusters/{{name}}/{{addonChart}}.yaml'
+          - '../../../clusters/{{.name}}/{{.addonChart}}.yaml'
         repoURL: 'https://github.com/akuity-cluster-addons-workshop/control-plane-template'
-        path: charts/addons/{{addonChart}}
+        path: charts/addons/{{.addonChart}}
         targetRevision: HEAD
       destination:
-        namespace: '{{addonChart}}'
-        name: '{{name}}'
+        namespace: '{{.addonChart}}'
+        name: '{{.name}}'
       syncPolicy:
         automated: {}
         syncOptions:
