@@ -9,16 +9,12 @@ spec:
   generators:
     - matrix:
         generators:
+          # For every directory (Helm Umbrella chart) in the `charts/addons` path.
           - git:
               repoURL: https://github.com/akuity-cluster-addons-workshop/control-plane-template
               revision: HEAD
               directories:
               - path: charts/addons/*
-          # - list:
-          #     elements:  # From `charts/addons` in the control-plane repo.
-          #     - addonChart: cert-manager
-          #     - addonChart: external-secrets
-          #     - addonChart: kyverno
 
           - clusters:
               selector:
