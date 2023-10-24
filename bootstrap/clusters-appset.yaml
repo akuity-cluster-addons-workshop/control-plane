@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: clusters
+  name: cluster-apps
 spec:
   generators:
   - clusters:
@@ -10,7 +10,7 @@ spec:
         - {key: 'akuity.io/argo-cd-cluster-name', operator: NotIn, values: [in-cluster]}
   template:
     metadata:
-      name: 'cluster-{{name}}'
+      name: 'apps-{{name}}'
     spec:
       project: default
       source:
@@ -20,7 +20,7 @@ spec:
         directory:
           recurse: true
       destination:
-        name: '{{name}}'
+        name: 'in-cluster'
         namespace: '*'
       syncPolicy:
         automated: {}
