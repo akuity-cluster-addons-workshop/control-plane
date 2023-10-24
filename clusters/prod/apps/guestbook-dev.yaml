@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook-prod
+spec:
+  destination:
+    name: prod
+    namespace: guestbook
+  source:
+    path: guestbook
+    repoURL: 'https://github.com/argoproj/argocd-example-apps/'
+    targetRevision: HEAD
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
