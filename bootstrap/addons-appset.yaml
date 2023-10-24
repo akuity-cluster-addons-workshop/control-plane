@@ -11,6 +11,7 @@ spec:
         generators:
           - list:
               elements:  # From `charts/addons` in the control-plane repo.
+              - addonChart: cert-manager
               - addonChart: external-secrets
               - addonChart: kyverno
           - clusters:
