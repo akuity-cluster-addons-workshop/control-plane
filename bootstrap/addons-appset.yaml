@@ -13,7 +13,7 @@ spec:
               repoURL: https://github.com/akuity-cluster-addons-workshop/control-plane-template
               revision: HEAD
               directories:
-              - path: charts/addons/
+              - path: charts/addons/*
           # - list:
           #     elements:  # From `charts/addons` in the control-plane repo.
           #     - addonChart: cert-manager
