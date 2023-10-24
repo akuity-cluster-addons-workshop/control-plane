@@ -21,6 +21,6 @@ spec:
           recurse: true
       destination:
         name: 'in-cluster'
-        namespace: '*'
+        namespace: 'argocd'
       syncPolicy:
         automated: {}
