@@ -3,17 +3,26 @@ kind: ApplicationSet
 metadata:
   name: addons
 spec:
+  # Use Go Text Template and Sprig function library.
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
     - matrix:
         generators:
           - list:
-              elements:  # from /charts/
+              elements:  # From `charts/addons` in the control-plane repo.
               - addonChart: external-secrets
               - addonChart: kyverno
           - clusters:
               selector:
                 matchExpressions:
+                # Don't deploy addons to cluster running Argo CD (i.e. the Akuity Platform).
                 - {key: 'akuity.io/argo-cd-cluster-name', operator: NotIn, values: [in-cluster]}
+
+                # Check annotation to see if addon is enabled.
+                - key: enable_{{ .addonChart | snakecase }}
+                  operator: In
+                  values: ['true']
   template:
     metadata:
       name: 'addon-{{name}}-{{addonChart}}'
