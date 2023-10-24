@@ -1,7 +1,0 @@
-cluster: workshop
-namespaces:
-- dev
-- stage
-- prod
-repos:
-- demo-app-deploy
