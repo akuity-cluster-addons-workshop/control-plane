@@ -1,0 +1,33 @@
+name: Update Repo URL
+on:
+  push:
+
+permissions:
+  contents: write
+
+jobs:
+  if: ${{ github.event.head_commit.message == "Initial commit" }}
+  search-and-replace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+          ref: 'main'  # checkout `main` instead of the `setup-complete` tag.
+
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "https://github.com/akuity-cluster-addons-workshop/control-plane-template"
+          replace: "${{ github.event.repository }}"
+          regex: false
+      - name: Commit files
+        run: |
+          git diff -- .
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "fix: update repo url"
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          branch: 'main'
