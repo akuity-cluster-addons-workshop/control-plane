@@ -20,7 +20,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/akuity-cluster-addons-workshop/control-plane-template
+        repoURL: https://github.com/akuity-cluster-addons-workshop/control-plane
         targetRevision: HEAD
         path: 'clusters/{{name}}/apps'
         directory:

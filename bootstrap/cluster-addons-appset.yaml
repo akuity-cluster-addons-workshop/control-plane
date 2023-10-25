@@ -11,7 +11,7 @@ spec:
         generators:
           # For every directory (Helm Umbrella chart) in the `charts/addons` path.
           - git:
-              repoURL: https://github.com/akuity-cluster-addons-workshop/control-plane-template
+              repoURL: https://github.com/akuity-cluster-addons-workshop/control-plane
               revision: HEAD
               directories:
               - path: charts/addons/*
@@ -37,7 +37,7 @@ spec:
           ignoreMissingValueFiles: true
           valueFiles:
           - '../../../clusters/{{.name}}/addons/{{.path.basename}}.yaml'
-        repoURL: 'https://github.com/akuity-cluster-addons-workshop/control-plane-template'
+        repoURL: 'https://github.com/akuity-cluster-addons-workshop/control-plane'
         path: '{{.path.path}}'
         targetRevision: HEAD
       destination:

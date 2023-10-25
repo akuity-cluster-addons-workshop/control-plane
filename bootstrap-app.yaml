@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     path: bootstrap/
-    repoURL: https://github.com/akuity-cluster-addons-workshop/control-plane-template
+    repoURL: https://github.com/akuity-cluster-addons-workshop/control-plane
     directory:
       recurse: true
   syncPolicy:

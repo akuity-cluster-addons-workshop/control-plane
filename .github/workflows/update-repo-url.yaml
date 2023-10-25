@@ -18,7 +18,7 @@ jobs:
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: "https://github.com/akuity-cluster-addons-workshop/control-plane-template"
+          find: "https://github.com/akuity-cluster-addons-workshop/control-plane"
           replace: "${{ github.server_url }}/${{ github.repository }}"
           exclude: ".github/workflows/update-repo-url.yaml"
           regex: false
