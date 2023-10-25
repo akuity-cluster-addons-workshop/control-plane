@@ -7,7 +7,13 @@ spec:
   - clusters:
       selector:
         matchExpressions:
+        # Don't deploy addons to cluster running Argo CD (i.e. the Akuity Platform).
         - {key: 'akuity.io/argo-cd-cluster-name', operator: NotIn, values: [in-cluster]}
+
+        # Check annotation to see if addon is enabled.
+        - key: ready
+          operator: In
+          values: ['true']
   template:
     metadata:
       name: 'apps-{{name}}'
