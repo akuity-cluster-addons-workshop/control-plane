@@ -19,7 +19,8 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: "https://github.com/akuity-cluster-addons-workshop/control-plane-template"
-          replace: "${{ github.event.repository }}"
+          replace: "${{ github.server_url }}/${{ github.repository }}"
+          exclude: ".github/workflows/update-repo-url.yaml"
           regex: false
       - name: Commit files
         run: |
@@ -31,3 +32,4 @@ jobs:
         uses: ad-m/github-push-action@v0.6.0
         with:
           branch: 'main'
+          github_token: ${{ github.token }}
