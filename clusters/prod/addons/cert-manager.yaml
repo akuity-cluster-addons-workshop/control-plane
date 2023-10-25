@@ -1,0 +1,3 @@
+cert-manager:
+  webhook:
+    timeoutSeconds: 4
