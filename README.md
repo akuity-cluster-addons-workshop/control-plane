@@ -1,6 +1,6 @@
 # Control Plane
 
-Control Plane repository defines the desired state of shared infrastructure components and enables self-service onboarding process for the application developer teams.
+This repository is used in [the Cluster Add-Ons with ApplicationSets tutorial](https://docs.akuity.io/tutorials/cluster-addons-with-applicationsets/) presented by Akuity.
 
 Repository contains the following directories:
 
