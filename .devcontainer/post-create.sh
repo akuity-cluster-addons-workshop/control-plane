@@ -7,5 +7,6 @@ echo "post-create start" >> ~/status
 echo alias k=kubectl >> /home/vscode/.bashrc
 echo 'alias cluster-dev="kubectl config use-context dev"' >> /home/vscode/.bashrc
 echo 'alias cluster-prod="kubectl config use-context prod"' >> /home/vscode/.bashrc
+echo 'export AKUITY_SERVER_URL=https://training.akuity.cloud' >> /home/vscode/.bashrc
 
 echo "post-create complete" >> ~/status
