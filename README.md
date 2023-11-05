@@ -11,4 +11,4 @@ Repository contains the following directories:
 | `akuity` | Argo CD instance configuration for the Akuity Platform for use with `akuity argocd apply -f`. |
 | `bootstrap` | `ApplicationSets` deployed by the `bootstrap` `Application`. |
 | `charts/addons` | Helm Umbrella charts used for cluster add-ons. |
-| `clusters` | Cluster|specific configurations, containing overrides for add-on chart values and `Applications` for the cluster. |
+| `clusters` | Cluster-specific configurations, containing overrides for add-on chart values and `Applications` for the cluster. |
