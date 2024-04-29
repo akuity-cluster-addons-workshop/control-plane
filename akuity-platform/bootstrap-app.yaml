@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap
+spec:
+  destination:
+    name: in-cluster
+    namespace: argocd
+  source:
+    path: bootstrap/
+    repoURL: 'https://github.com/akuity-cluster-addons-workshop/control-plane'
+    targetRevision: HEAD
+    directory: {}
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
