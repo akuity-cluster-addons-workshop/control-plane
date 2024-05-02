@@ -28,7 +28,7 @@ spec:
               matchLabels:
                 environment: dev
             values:
-              addonChartVersion: v1.13.1
+              addonChartVersion: v1.14.5
   template:
     metadata:
       name: 'addon-{{.name}}-cert-manager'
