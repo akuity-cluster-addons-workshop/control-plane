@@ -1,4 +1,0 @@
-# The cert-manager chart is a dependecy of this Umbrella chart, therefore all
-# values must be under the `cert-manager` key.
-cert-manager:
-  installCRDs: true
