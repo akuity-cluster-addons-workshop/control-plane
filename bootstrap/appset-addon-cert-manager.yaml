@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: cluster-addons
+  name: addons-cert-manager
 spec:
   # Use Go Text Template and Sprig function library.
   goTemplate: true
