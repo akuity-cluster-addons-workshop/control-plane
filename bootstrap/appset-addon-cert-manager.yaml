@@ -38,7 +38,7 @@ spec:
         # Helm chart source.
         - repoURL: 'https://charts.jetstack.io'
           chart: 'cert-manager'
-          targetRevision: '{{values.addonChartVersion}}'
+          targetRevision: '{{.values.addonChartVersion}}'
           helm:
             releaseName: 'cert-manager'
             ignoreMissingValueFiles: true
