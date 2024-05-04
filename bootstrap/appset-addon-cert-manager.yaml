@@ -12,7 +12,7 @@ spec:
         generators:
         - clusters:
             values:
-              # Default chart verison
+              # Default chart version
               addonChartVersion: v1.13.1
             selector:
               matchExpressions:
