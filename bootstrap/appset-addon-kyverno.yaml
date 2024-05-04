@@ -13,7 +13,7 @@ spec:
         - clusters:
             values:
               # Default chart verison
-              addonChartVersion: v1.13.1
+              addonChartVersion: v2.3.4
             selector:
               matchExpressions:
               # Don't deploy addons to cluster running Argo CD (i.e. the Akuity Platform).
@@ -28,7 +28,7 @@ spec:
               matchLabels:
                 environment: dev
             values:
-              addonChartVersion: v1.14.5
+              addonChartVersion: v2.3.4
   template:
     metadata:
       name: 'addon-{{.name}}-kyverno'
@@ -36,7 +36,7 @@ spec:
       project: default
       sources:
         # Helm chart source.
-        - repoURL: 'https://charts.jetstack.io'
+        - repoURL: 'https://kyverno.github.io/kyverno'
           chart: 'kyverno'
           targetRevision: '{{.values.addonChartVersion}}'
           helm:
