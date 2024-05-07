@@ -1,0 +1,59 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: addons-cert-manager
+spec:
+  # Use Go Text Template and Sprig function library.
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - merge:
+        mergeKeys: [server]
+        generators:
+        - clusters:
+            values:
+              # Default chart version
+              addonChartVersion: v1.13.1
+            selector:
+              matchExpressions:
+              # Don't deploy addons to cluster running Argo CD (i.e. the Akuity Platform).
+              - {key: 'akuity.io/argo-cd-cluster-name', operator: NotIn, values: [in-cluster]}
+
+              # Check annotation to see if addon is enabled.
+              - key: enable_cert_manager
+                operator: In
+                values: ['true']
+        - clusters:
+            selector:
+              matchLabels:
+                environment: dev
+            values:
+              addonChartVersion: v1.14.5
+  template:
+    metadata:
+      name: 'addon-{{.name}}-cert-manager'
+    spec:
+      project: default
+      sources:
+        # Helm chart source.
+        - repoURL: 'https://charts.jetstack.io'
+          chart: 'cert-manager'
+          targetRevision: '{{.values.addonChartVersion}}'
+          helm:
+            releaseName: 'cert-manager'
+            ignoreMissingValueFiles: true
+            valueFiles:
+            - '$values/clusters/{{.name}}/addons/cert-manager.yaml'
+        
+        # Helm valueFiles source.
+        - repoURL: 'https://github.com/akuity-cluster-addons-workshop/control-plane'
+          targetRevision: 'HEAD'
+          ref: values
+      destination:
+        namespace: 'cert-manager'
+        name: '{{.name}}'
+      syncPolicy:
+        automated: {}
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true  # Big CRDs.
