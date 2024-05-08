@@ -1,7 +1,7 @@
 apiVersion: argocd.akuity.io/v1alpha1
 kind: ArgoCD
 metadata:
-  name: argo-cd
+  name: cluster-addons
 spec:
   description: ""
   instanceSpec: {}
