@@ -12,7 +12,8 @@ akuity config set --organization-id=${ORG_ID}
 echo "Set the org id to \"${ORG_ID}\"."
 
 # Apply the declarative akuity platform configuration.
-echo "Creating an Argo CD instance from the contents of the \"akuity-platform\" folder."
+echo "Creating an Argo CD instance on the Akuity Platform,"
+echo "from the declarative configuring in the \"akuity-platform\" folder."
 akuity argocd apply -f akuity-platform/
 
 # Loop until the instance becomes healthly.
@@ -44,5 +45,8 @@ argocd login \
   --password akuity-argocd \
   --grpc-web 
 echo "Configured the \"argocd\" cli."
+
+# Trigger refresh since app may get deployed before repo server is up (stuck with ComparisonError).
+argocd app get bootstrap --refresh > /dev/null
 
 echo "Workshop environment setup!"
