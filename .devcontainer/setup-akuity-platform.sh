@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e  # Exit on non-zero exit code from commands
 
 # Function to get the health status code
 get_health_status() {
@@ -36,5 +37,12 @@ echo "Deploying Akuity Agent manifests to prod cluster."
 kubectl config use-context kind-prod
 akuity argocd cluster get-agent-manifests \
   --instance-name=cluster-addons prod | kubectl apply -f -
+
+argocd login \
+  "$(akuity argocd instance get cluster-addons -o json | jq -r '.id').cd.training.akuity.cloud" \
+  --username admin \
+  --password akuity-argocd \
+  --grpc-web 
+echo "Configured the \"argocd\" cli."
 
 echo "Workshop environment setup!"
