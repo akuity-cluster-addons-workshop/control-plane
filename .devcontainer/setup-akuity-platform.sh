@@ -7,7 +7,7 @@ get_health_status() {
 }
 
 ORG_ID=$(akuity org list | awk 'NR==2 {print $1}')
-# Set the organization id in the cli config so users donn't have to set it.
+# Set the organization id in the cli config so users don't have to set it.
 akuity config set --organization-id=${ORG_ID}
 echo "Set the org id to \"${ORG_ID}\"."
 
