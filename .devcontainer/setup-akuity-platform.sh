@@ -27,6 +27,7 @@ do
 	health_status=$(get_health_status)
 	counter=$((counter+1))
 done
+echo "Argo CD instance is now healthy!"
 
 # Deploy agent to kind clusters.
 echo "Deploying Akuity Agent manifests to dev cluster."
