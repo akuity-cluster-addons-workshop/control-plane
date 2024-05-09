@@ -28,19 +28,20 @@ while true; do
     sleep 30  # Average 90 seconds
 done
 
-# Deploy agent to kind clusters.
+# Deploy agent to clusters.
 echo "Deploying Akuity Agent manifests to dev cluster."
-kubectl config use-context kind-dev
+kubectl config use-context k3d-dev
 akuity argocd cluster get-agent-manifests \
   --instance-name=cluster-addons dev | kubectl apply -f -
 
 echo "Deploying Akuity Agent manifests to prod cluster."
-kubectl config use-context kind-prod
+kubectl config use-context k3d-prod
 akuity argocd cluster get-agent-manifests \
   --instance-name=cluster-addons prod | kubectl apply -f -
 
+domain=$(awk -F'[/:]' '{print $4}' <<< "$AKUITY_SERVER_URL")
 argocd login \
-  "$(akuity argocd instance get cluster-addons -o json | jq -r '.id').cd.training.akuity.cloud" \
+  "$(akuity argocd instance get cluster-addons -o json | jq -r '.id').cd.${domain}" \
   --username admin \
   --password akuity-argocd \
   --grpc-web 
