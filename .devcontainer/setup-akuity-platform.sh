@@ -39,8 +39,9 @@ kubectl config use-context k3d-prod
 akuity argocd cluster get-agent-manifests \
   --instance-name=cluster-addons prod | kubectl apply -f -
 
+domain=$(awk -F'[/:]' '{print $4}' <<< "$AKUITY_SERVER_URL")
 argocd login \
-  "$(akuity argocd instance get cluster-addons -o json | jq -r '.id').cd.training.akuity.cloud" \
+  "$(akuity argocd instance get cluster-addons -o json | jq -r '.id').cd.${domain}" \
   --username admin \
   --password akuity-argocd \
   --grpc-web 
