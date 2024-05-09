@@ -5,7 +5,7 @@ metadata:
   labels:
     environment: "dev"
 spec:
-  description: "kind dev cluster"
+  description: "dev cluster"
   data:
     size: small
 ---
@@ -16,6 +16,6 @@ metadata:
   labels:
     environment: "prod"
 spec:
-  description: "kind prod cluster"
+  description: "prod cluster"
   data:
     size: small

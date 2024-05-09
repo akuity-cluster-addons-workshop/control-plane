@@ -4,7 +4,7 @@ echo "post-create start" >> ~/status
 
 # this runs in background after UI is available
 
-echo 'alias cluster-dev="kubectl config use-context kind-dev"' >> /home/vscode/.bashrc
-echo 'alias cluster-prod="kubectl config use-context kind-prod"' >> /home/vscode/.bashrc
+k3d cluster create --config .devcontainer/k3d-dev.yaml --wait | tee -a ~/.status.log
+k3d cluster create --config .devcontainer/k3d-prod.yaml --wait | tee -a ~/.status.log
 
 echo "post-create complete" >> ~/status
