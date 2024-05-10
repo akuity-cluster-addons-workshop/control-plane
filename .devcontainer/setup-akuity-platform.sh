@@ -17,16 +17,17 @@ echo "from the declarative configuring in the \"akuity-platform\" folder."
 akuity argocd apply -f akuity-platform/
 
 # Loop until the instance becomes healthly.
-while true; do
-    health_status=$(get_health_status)
-    # echo "Current health status: $health_status"
-    if [ "$health_status" = "STATUS_CODE_HEALTHY" ]; then
-        echo "The Argo CD instance is healthy. Exiting loop."
-        break
-    fi
-    echo "The Argo CD instance is still progressing. Waiting 30 seconds..."
-    sleep 30  # Average 90 seconds
+health_status=$(get_health_status)
+counter=0
+until [[ "$health_status" == "STATUS_CODE_HEALTHY" ]];
+do
+	[[ ${counter} -ge 5 ]] && echo "Instance took too long to report healthy" && exit 13
+	echo "The Argo CD instance is still progressing. Waiting 30 seconds..."
+	sleep 30  # Average 90 seconds, use 30 to show progress.
+	health_status=$(get_health_status)
+	counter=$((counter+1))
 done
+echo "Argo CD instance is now healthy!"
 
 # Deploy agent to clusters.
 echo "Deploying Akuity Agent manifests to dev cluster."
